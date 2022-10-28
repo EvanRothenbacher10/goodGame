@@ -1,2 +1,2 @@
 # goodGame
-Frist try at actual game
+First try at actual game
