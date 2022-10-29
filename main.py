@@ -2,29 +2,25 @@ import pygame
 import time
 import random
 
-class player():
-    posX = None
-    posY = 4
-    weight = None
-    health = None
+class playerClass():
 
-    def __init__(self, posX, posY, weight, health):
-        self.posX = posX
-        self.posY = posY
-        self.weight = weight
+    def __init__(self, name, posX, posY, health):
+        self.name = name
+        self.posX = 0
+        self.posY = 0
         self.health = health
 
-    def jump(x):
-        global posY
-        copyosY = posY
+    def jump(self):
         x = 0
-        for i in range(0, 10):
-            print(posY)
-            posY = copyosY + -0.5* x ** 2 + 5 * x
+        copyosY = self.posY
+        for i in range(0, 12):
+            print(self.posY)
+            self.posY = copyosY + -0.5* x ** 2 + 5 * x
             x = x + 1
             time.sleep(0.2)
         x = 0
 
 #y\ =-.5x^{2}\ +\ 5x
 
-player.jump(0)
+player = playerClass("player1", 0, 0, 100)
+player.jump()
