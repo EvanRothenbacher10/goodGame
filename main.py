@@ -1,26 +1,43 @@
-import pygame
-import time
 import random
+import threading
+import time
 
-class playerClass():
+import pygame as pg
 
-    def __init__(self, name, posX, posY, health):
-        self.name = name
-        self.posX = 0
-        self.posY = 0
-        self.health = health
+from playerClass import *
 
-    def jump(self):
-        x = 0
-        copyosY = self.posY
-        for i in range(0, 12):
-            print(self.posY)
-            self.posY = copyosY + -0.5* x ** 2 + 5 * x
-            x = x + 1
-            time.sleep(0.2)
-        x = 0
+#Variables
 
-#y\ =-.5x^{2}\ +\ 5x
+pg.init()
 
+bgColor = (0, 0, 0)
+screen = pg.display.set_mode((640, 360))
+screen.fill(bgColor)
+pg.display.set_caption("Good Game (pygame)")
+running = True
+origin = (0, 0)
 player = playerClass("player1", 0, 0, 100)
-player.jump()
+
+
+#Functions
+
+def keyCheck():
+    print("keyCheck thread running")
+    while True:
+        keys=pg.key.get_pressed()
+        if keys[pg.K_SPACE]:
+            player.jump()
+            time.sleep(6)
+                
+keysThread = threading.Thread(target= keyCheck)
+
+keysThread.start()
+
+while True:
+    screen.fill(bgColor)
+    screen.blit()
+
+    pg.display.flip() #Updates screen
+    for event in pg.event.get():
+        if event.type == pg.QUIT:
+            running = False
